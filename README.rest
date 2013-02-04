@@ -1,0 +1,66 @@
+.. vim: ft=rst sts=2 sw=2 tw=77
+.. default-role:: literal
+
+=============================================================================
+                                  HashStruct
+=============================================================================
+-----------------------------------------------------------------------------
+                            Ruby Hash/Struct Hybrid
+-----------------------------------------------------------------------------
+
+:Author: Roman Neuhauser
+:Contact: rneuhauser@suse.cz
+:Copyright: This document is in the public domain.
+
+.. this file is marked up using reStructuredText
+   lines beginning with ".." are reST directives
+   "foo_" or "`foo bar`_" is a link, defined at ".. _foo" or ".. _foo bar"
+   "::" introduces a literal block (usually some form of code)
+   "`foo`" is some kind of identifier
+   suspicious backslashes in the text ("`std::string`\s") are required for
+   reST to recognize the preceding character as syntax
+
+Warning
+=======
+
+Everything is subject to change.  This document does not describe
+the actual currently implemented behavior.
+
+Synopsis
+========
+
+`HashStruct` is a Ruby-1.9-compatible library exposing a single
+eponymous class.
+This class provides most of the `Hash`_ interface, plus `Struct`_'s
+`dot-name` member access.
+The `Struct`-like interface does not permit creation of new fields.
+
+.. _Hash:       http://www.ruby-doc.org/core-1.9.3/Hash.html
+.. _OpenStruct: http://www.ruby-doc.org/core-1.9.3/OpenStruct.html
+.. _Struct:     http://www.ruby-doc.org/core-1.9.3/Struct.html
+
+HashStruct#new hash = {}
+  ...
+
+HashStruct#[] key
+  `key` must be a `symbol`.
+  Returns the corresponding value or `nil`.
+
+HashStruct#[]= key, val
+  `key` must be a `symbol`, `val` is anything.
+  Inserts or updates `key` with `val`.
+  Returns `val`.
+
+Example
+=======
+
+::
+
+  hs = HashStruct.new id: 42, name: 'fubar'
+
+  hs.name    = 'snafu'          # ok, see constructor argument keys
+  hs[:name]  = 'snafu'          # ok as well
+  hs.email   = 'sna@fu.bar'     # error: fields cannot be created this way
+  hs[:email] = 'sna@fu.bar'     # ok: ... but this is good
+  hs.email   = 'snafu@fu.bar'   # ok: the field exists already, ok
+

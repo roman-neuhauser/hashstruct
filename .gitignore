@@ -1,3 +1,4 @@
 .*.sw?
 .sw?
+*.html
 hashstruct-*.gem
