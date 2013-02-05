@@ -51,6 +51,14 @@ HashStruct#[]= key, val
   Inserts or updates `key` with `val`.
   Returns `val`.
 
+HashStruct#foo
+  Raises `NoMethodError` unless `foo` is an existing key.
+  Returns the value corresponding to the `foo` key.
+
+HashStruct#foo= val
+  Raises `NoMethodError` unless `foo` is an existing key.
+  Returns `val`.
+
 Example
 =======
 
