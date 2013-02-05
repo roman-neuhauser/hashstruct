@@ -20,6 +20,8 @@
    suspicious backslashes in the text ("`std::string`\s") are required for
    reST to recognize the preceding character as syntax
 
+.. contents::
+
 Warning
 =======
 
@@ -58,6 +60,15 @@ HashStruct#foo
 HashStruct#foo= val
   Raises `NoMethodError` unless `foo` is an existing key.
   Returns `val`.
+
+License
+=======
+
+`HashStruct` is distributed under the `MIT license`_.
+See the LICENSE_ file.
+
+.. _MIT license: http://opensource.org/licenses/MIT
+.. _LICENSE:     LICENSE
 
 Example
 =======
