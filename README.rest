@@ -23,7 +23,7 @@
 Warning
 =======
 
-Everything is subject to change.  This document does not describe
+Everything is subject to change.  This document may not describe
 the actual currently implemented behavior.
 
 Synopsis
