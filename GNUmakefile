@@ -1,8 +1,12 @@
-RSPEC?=	rspec
+GEM   ?=	gem
+RSPEC ?=	rspec
 
 all:
 
 check:
 	$(RSPEC)
 
-.PHONY: all check
+gem:
+	$(GEM) build hashstruct.gemspec
+
+.PHONY: all check gem
