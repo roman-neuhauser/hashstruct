@@ -4,3 +4,5 @@ all:
 
 check:
 	$(RSPEC)
+
+.PHONY: all check
