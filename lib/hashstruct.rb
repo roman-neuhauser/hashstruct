@@ -34,7 +34,12 @@ class HashStruct
       key = key[0..-2].to_sym
       realsym = :[]=
     end
-    raise NoMethodError.new sym.to_s unless @impl.has_key? key
+    unless @impl.has_key? key
+      raise NoMethodError.new "undefined method `%s' for %s" % [
+        sym.to_s,
+        self
+      ]
+    end
     @impl.send realsym, *([key] + args), &block
   end
 
