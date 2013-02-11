@@ -9,15 +9,19 @@ describe HashStruct do
     HashStruct.new *args
   end
 
-  context "object construction" do
+  context "default object constructor" do
 
-    it "default constructor succeeds" do
+    it "succeeds" do
       construct
     end
 
     it "creates instances of HashStruct" do
       construct.class == HashStruct
     end
+
+  end
+
+  context "construction from a Hash" do
 
     it "creates keys from constructor arguments" do
       o = construct foo: 42, bar: 69
@@ -27,6 +31,22 @@ describe HashStruct do
 
     it "creates members from constructor arguments" do
       o = construct foo: 42, bar: 69
+      o.foo.should equal 42
+      o.bar.should equal 69
+    end
+
+  end
+
+  context "construction from an Array" do
+
+    it "creates keys from constructor arguments" do
+      o = construct [[:foo, 42], [:bar, 69]]
+      o[:foo].should equal 42
+      o[:bar].should equal 69
+    end
+
+    it "creates members from constructor arguments" do
+      o = construct [[:foo, 42], [:bar, 69]]
       o.foo.should equal 42
       o.bar.should equal 69
     end
