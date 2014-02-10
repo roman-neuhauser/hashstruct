@@ -25,14 +25,14 @@ describe HashStruct do
 
     it "creates keys from constructor arguments" do
       o = construct foo: 42, bar: 69
-      o[:foo].should equal 42
-      o[:bar].should equal 69
+      expect(o[:foo]).to equal 42
+      expect(o[:bar]).to equal 69
     end
 
     it "creates members from constructor arguments" do
       o = construct foo: 42, bar: 69
-      o.foo.should equal 42
-      o.bar.should equal 69
+      expect(o.foo).to equal 42
+      expect(o.bar).to equal 69
     end
 
   end
@@ -41,14 +41,14 @@ describe HashStruct do
 
     it "creates keys from constructor arguments" do
       o = construct [[:foo, 42], [:bar, 69]]
-      o[:foo].should equal 42
-      o[:bar].should equal 69
+      expect(o[:foo]).to equal 42
+      expect(o[:bar]).to equal 69
     end
 
     it "creates members from constructor arguments" do
       o = construct [[:foo, 42], [:bar, 69]]
-      o.foo.should equal 42
-      o.bar.should equal 69
+      expect(o.foo).to equal 42
+      expect(o.bar).to equal 69
     end
 
   end
@@ -57,13 +57,14 @@ describe HashStruct do
 
     it "permits #[] with nonexistent keys" do
       o = construct
-      o[:foo].should equal nil
+      expect(o[:foo]).to equal nil
     end
 
     it "permits key insertion (#[]=)" do
       o = construct
       m = Object.new
-      (o[:foo] = m).should equal m
+      expect(o[:foo] = m).to equal m
+      expect(o[:foo]    ).to equal m
     end
 
   end
@@ -72,18 +73,20 @@ describe HashStruct do
 
     it "does not permit member creation (#foo=)" do
       o = construct
-      expect { o.foo = 42 }.to raise_error NoMethodError, /foo=/
+      expect{ o.foo = 42 }.to raise_error \
+        NoMethodError, /foo=/
     end
 
     it "permits member access (#foo)" do
       m = Object.new
       o = construct foo: m
-      (o.foo).should equal m
+      expect(o.foo).to equal m
     end
 
     it "permits member clobbering (#foo=)" do
       o = construct foo: 42
-      (o.foo = 69).should equal 69
+      expect(o.foo = 69).to equal 69
+      expect(o.foo     ).to equal 69
     end
 
   end
@@ -96,11 +99,11 @@ describe HashStruct do
       o.send method do |k, v|
         p[k] = v
       end
-      p.size.should equal 2
-      p.keys.should include :foo
-      p.keys.should include :bar
-      p[:foo].should equal 42
-      p[:bar].should equal 69
+      expect(p.size).to equal 2
+      expect(p.keys).to include :foo
+      expect(p.keys).to include :bar
+      expect(p[:foo]).to equal 42
+      expect(p[:bar]).to equal 69
     end
 
     it "supports #each" do
@@ -117,9 +120,9 @@ describe HashStruct do
       o.each_key do |k, v|
         p[k] = true
       end
-      p.size.should equal 2
-      p.keys.should include :foo
-      p.keys.should include :bar
+      expect(p.size).to equal 2
+      expect(p.keys).to include :foo
+      expect(p.keys).to include :bar
     end
 
     it "supports #each_value" do
@@ -128,9 +131,9 @@ describe HashStruct do
       o.each_value do |v|
         p << v
       end
-      p.size.should equal 2
-      p.should include 42
-      p.should include 69
+      expect(p.size).to equal 2
+      expect(p).to include 42
+      expect(p).to include 69
     end
 
   end
